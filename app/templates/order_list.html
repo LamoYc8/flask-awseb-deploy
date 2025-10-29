@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!-- create order btn-->
+<div>
+    <a class="btn btn-info" style="margin-bottom: 10px;" href="/order/create" role="button">Create</a>
+</div>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Order ID</th>
+            <th scope="col">URL</th>
+            <th scope="col">Count</th>
+            <th scope="col">Status</th>
+            <th scope="col">User name</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in list %}
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.url}}</td>
+            <td>{{item.count}}</td>
+            <td><span class="badge text-bg-{{ status_dict[item.status].cls }}">{{ status_dict[item.status].text
+                    }}</span></td>
+            <td>{{item.real_name}}</td>
+        </tr>
+
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock %}
