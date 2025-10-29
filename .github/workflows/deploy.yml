@@ -27,8 +27,10 @@ jobs:
     # the second task 
     compose:
       runs-on: ubuntu-latest
-      needs: build # 依赖于 build 
+      needs: build 
+      # 它主要传递的是前一个job 的输出（artifacts）、执行状态以及job 的名称 
       steps:
+        - uses: actions/checkout@v4
         - name: Set up Docker Compose
           uses: docker/setup-compose-action@v1
         
