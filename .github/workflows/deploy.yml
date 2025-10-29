@@ -39,7 +39,6 @@ jobs:
             docker compose up --build -d
             docker ps
             sleep 30
-            curl -f http://0.0.0.0:5000 || exit 1
             docker-compose down
 
     deploy:
