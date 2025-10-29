@@ -53,13 +53,10 @@ jobs:
         
         - name: Install EB CLI
           run: pip install awsebcli
-        
-        - name: Debug identity
-          run: aws sts get-caller-identity
 
         - name: Configure AWS credentials using OIDC
           uses: aws-actions/configure-aws-credentials@v4
           with: 
-            role-to-assume: ${{ secrets.AWS_OIDC_ROLE }}
+            role-to-assume: arn:aws:iam::041100918363:role/github-actions-workflow-role
             aws-region: ${{ env.AWS_REGION }}
 
