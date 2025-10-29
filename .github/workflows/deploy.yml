@@ -53,6 +53,9 @@ jobs:
         
         - name: Install EB CLI
           run: pip install awsebcli
+        
+        - name: Debug identity
+          run: aws sts get-caller-identity
 
         - name: Configure AWS credentials using OIDC
           uses: aws-actions/configure-aws-credentials@v4
