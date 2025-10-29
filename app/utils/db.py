@@ -1,7 +1,15 @@
-import pymysql
+import pymysql, os
+from dotenv import load_dotenv
 from pymysql import cursors
 
 from dbutils.pooled_db import PooledDB
+
+load_dotenv()
+
+DB_HOST = os.getenv("MYSQL_HOST", "db")
+DB_USR =  os.getenv("MYSQL_USER", "flaskusr")
+DB_PASSWORD = os.getenv("MYSQL_PASSWORD", "1357901111")
+DB_NAME = os.getenv("MYSQL_DB", "flaskdb")
 
 POOL = PooledDB(
     creator=pymysql,
@@ -14,7 +22,9 @@ POOL = PooledDB(
 
     # following parameters can be the db related inform
     # host, port, pwd, db_name......
-    host='127.0.0.1', port=3306, user='root', passwd='1357901111', db='flask_web'
+    #host='127.0.0.1', port=3306, user='root', passwd='1357901111', db='flask_web'
+    host=DB_HOST, port=3306, user=DB_USR, passwd=DB_PASSWORD, db=DB_NAME
+
 )
 
 def fetch_one(sql, params) -> dict:

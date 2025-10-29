@@ -1,10 +1,11 @@
-# Celery Worker 异步框架
+# 加入 Celery Worker 异步框架
 
 import redis, json, hashlib
 from dbutils.pooled_db import PooledDB
 from pymysql import cursors
 import pymysql
 from concurrent.futures import ThreadPoolExecutor
+from celery import Celery
 
 # 池化redis connection 
 REDIS_POOL = redis.ConnectionPool(host='127.0.0.1', port=6379, encoding='utf-8', max_connections=50)

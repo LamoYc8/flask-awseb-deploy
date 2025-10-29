@@ -8,7 +8,6 @@ usrLogin = Blueprint('usrLogin', __name__, template_folder='..templates', static
 # first parameter: the name give to the blueprint, will used for internal routing
 # Blueprint package, locate the root_path for the blueprint
 
-
 @usrLogin.route('/login', methods=['POST', 'GET'])
 def usr_login():
     if request.method == 'GET':
