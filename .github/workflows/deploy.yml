@@ -38,8 +38,8 @@ jobs:
           run: |
             docker compose up --build -d
             docker ps
-            sleep 30
-            docker-compose down
+            sleep 10
+            docker compose down
 
     deploy:
         name: Deploy
