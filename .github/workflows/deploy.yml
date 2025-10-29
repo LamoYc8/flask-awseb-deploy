@@ -34,7 +34,7 @@ jobs:
         
         - name: Build and Test
           run: |
-            docker-compose up --force-recreate --build -d
+            docker compose up --build -d
             docker ps
             sleep 30
             curl -f http://localhost:5000 || exit 1
