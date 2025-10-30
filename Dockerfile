@@ -3,7 +3,7 @@
 FROM python:3.13-slim
 
 # base image 工作dir
-WORKDIR /app
+WORKDIR /flask-web
 
 # copy 依赖文件，Docker cache layer可以复用
 COPY requirements.txt .
@@ -20,6 +20,6 @@ COPY . .
 EXPOSE 5000
 
 # 生产环境 gunicorn 启动，性能和稳定性更好
-CMD [ "gunicorn", "-b", "0.0.0.0:5000", "app:app" ]
+CMD [ "gunicorn", "-b", "0.0.0.0:5000", "run:app" ]
 #CMD ["python", "app.py"]
 # 每一次是独立，即使上面RUN有虚拟环境，这里的CMD如果不指定也不会生效
