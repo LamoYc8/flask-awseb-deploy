@@ -2,9 +2,9 @@ name: Deploy Flask + MySQL to AWS EB
 
 on:
     pull_request:
-      branches: ["main", ]
+      branches: ["main"]
     push:
-      branches: [ "main"]
+      branches: [ "main", "deploy-wf"]
             
 env:
     AWS_REGION: ap-southeast-1
