@@ -12,6 +12,11 @@ usrLogin = Blueprint('usrLogin', __name__, template_folder='..templates', static
 def index():
     return redirect('/login')
 
+#aws eb health check purpose
+@usrLogin.route("/")
+def health():
+    return "ok",200
+
 @usrLogin.route('/login', methods=['POST', 'GET'])
 def usr_login():
     if request.method == 'GET':
