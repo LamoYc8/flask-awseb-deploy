@@ -2,9 +2,9 @@ name: Deploy Flask + MySQL to AWS EB
 
 on:
     pull_request:
-      branches: ["main", ]
+      branches: ["main"]
     push:
-      branches: [ "main"]
+      branches: [ "main", "deploy-wf"]
             
 env:
     AWS_REGION: ap-southeast-1
@@ -40,8 +40,18 @@ jobs:
           run: |
             docker compose up --build -d
             docker ps
-            sleep 10
-            curl --retry 10 --retry-delay 5 -v http://localhost:5000
+            echo "=== Container Logs ==="
+            docker logs flask-web
+            echo "=== Waiting for Flask App ==="
+            for i in {1..15}; do 
+              if curl -s -4 http://localhost:5000 > /dev/null; then
+                echo "Flask app is ready!"
+                break
+              fi
+              echo "Waiting for app to be ready..."
+              sleep 3
+            done
+            curl -4 -v http://localhost:5000
             docker compose down
 
     deploy:
@@ -60,6 +70,6 @@ jobs:
         - name: Configure AWS credentials using OIDC
           uses: aws-actions/configure-aws-credentials@v4
           with: 
-            role-to-assume: arn:aws:iam::041100918363:role/github-actions-workflow-role
+            role-to-assume: ${{ secrets.AWS_OIDC_ROLE }}
             aws-region: ${{ env.AWS_REGION }}
 
